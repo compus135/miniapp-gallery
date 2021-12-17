@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<!-- <view class="container">
+
+</view> -->
+<view class="main-wrapper">
+  <div></div>
+  <button wx:if="{{!empowered}}" open-type="getUserInfo" bindtap='getUserInfo' style="width:100vw;height:100vh;line-height:100vh"><a style="color:blue">点击授权，仅获取用户名以及头像</a></button>
+</view>
+
+

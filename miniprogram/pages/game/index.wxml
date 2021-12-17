@@ -1,0 +1,67 @@
+<!--pages/game/index.wxml-->
+<!-- <wxs module="fn">
+      module.exports = {
+          setSugarClasss: function(sugarList,item){
+            var sugar = sugarList.filter(function(v){return v.id===parseInt(item)});
+            return sugar[0]?'game-item-sugar12':'';
+          }
+      }
+  </wxs> -->
+<view class='game-wrapper' >
+<!-- 抢喜糖 -->
+<div class="game-home game-home-bg" style="display:{{!isPlay&&!isViewScoreList?'flex':'none'}}">
+  <div class="game-home-main">
+    <div class="game-home-title">
+      <div>抢<span style="font-size:30px;margin-right:10px" >喜糖🍬</span>赢<span style="font-size:30px;color:red" >红包😍</span></div>
+      <div>第一名 88.88</div>
+      <div>第二名 68.88</div>
+      <div>第三名 28.88</div>
+      <div >截至 2019-01-31 23:59:59</div>
+    </div>
+    <div class="game-home-tip">🍬🍬🍬（*纯属好玩*）🍬🍬🍬</div>
+    <div class="game-play"  bindtap="beginPlay">开始游戏</div>
+    <div class="game-scores-switch" bindtap="viewScoreBorad">喜糖榜 >></div>
+  </div>
+</div>
+
+<!-- 榜单 -->
+<div class="game-scoreborad game-home-bg" style="display:{{isViewScoreList?'flex':'none'}}">
+  <div class="game-scoreborad-close"  bindtap="closeScoreBorad">×</div>
+  <div class="game-scoreborad-title" >🍬已有{{scoreList.length}}人加入抢喜糖🍬</div>
+  <div class="game-scores-main">
+    <block  wx:for="{{scoreList}}" wx:key="{{item.userName}}">
+      <div  class="game-score-item">
+        <div class="game-score-order" >{{index+1}}</div>
+        <div class="game-score-avatar" ><image src='{{item.avatarUrl}}'></image></div>
+        <div class="game-score-name" >{{item.userName}}</div>
+        <div class="game-score-score" >{{item.score}}</div>
+      </div>
+    </block>
+  </div>
+</div>
+
+<!-- 结算面板 -->
+<div class="game-over game-home-bg"  style="display:{{isPlay&&countDown===0&&!isViewScoreList?'block':'none'}}">
+  <div class="game-over-main" >
+        <div>抢到喜糖</div>
+        <div>{{score}}</div>
+        <div>历史最佳排名</div>
+        <div>{{order}}</div>
+    <div class="game-playagain" bindtap="playAgain">再抢一次</div>
+    <div class="game-scores-switch" bindtap="viewScoreBorad">喜糖榜 >></div>
+  </div>
+</div>
+  
+  <div class="game-score"  style="display:{{isPlay&&countDown!==0?'block':'none'}}">  🍬 {{score}}</div>
+  <div class="game-replay"  style="display:{{isPlay&&countDown!==0?'block':'none'}}"  bindtap="rePlay">
+    {{countDown}}s <i class="iconfont icon-refresh" ></i>
+  </div>
+  <!-- 游戏主面板 -->
+  <div class="game-canvas {{isPlay?'game-canvas-play':''}}">
+    <block  wx:for="{{list}}" wx:key="{{item.id}}">
+      <div  class="game-item  {{item.isSugar?'game-item-sugar game-item-sugar'+item.sugarNum:''}}" bindtouchstart="gameItemClick" data-item="{{item}}">
+      <!-- {{item.id}} -->
+      </div>
+    </block>
+  </div>
+</view>

@@ -1,0 +1,204 @@
+<!--index.wxml-->
+<!-- <view class="container">
+
+</view> -->
+<view  wx:if="{{!empowered}}">
+  <div></div>
+  <button open-type="getUserInfo" bindtap='getUserInfo' style="width:100vw;height:100vh;line-height:100vh"><a style="color:blue">点击授权，仅获取用户名以及头像</a></button>
+</view>
+
+<view class="main-wrapper"  wx:if="{{ empowered}}">
+  <!-- 快闪 -->
+  <div class="fastshow-wrapper" style="display:{{isFastShow?'fixed':'none'}}">
+    <a class="fastshow-jump" bindtap="jumpFastshow" >跳过</a>
+    <div class="fastshow-animation1">
+      <div class='fastshow-animation1text'>2019年1月31日 我们结婚啦</div>
+    </div>
+    <div  class="fastshow-animation2">
+      <div>新郎-艾云</div>
+    </div>
+    <div class="fastshow-animation3">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder2.png' ></image>
+    </div>
+    <div  class="fastshow-animation4">
+      <div>新娘-汤丽燕</div>
+    </div>
+    <div class="fastshow-animation5">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder4.png' ></image>
+    </div>
+    <div  class="fastshow-animation6">
+      <div>关于我们</div>
+    </div>
+    <div  class="fastshow-animation7">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder1.png' ></image>
+    </div>
+    <div  class="fastshow-animation8">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder3.png' ></image>
+      
+    </div>
+    <div  class="fastshow-animation9">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder5.png' ></image>
+    </div>
+    <div  class="fastshow-animation10">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder6.png' ></image>
+    </div>
+    <div  class="fastshow-animation11">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder7.png' ></image>
+    </div>
+    <div  class="fastshow-animation12">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder8.png' ></image>
+    </div>
+    <div  class="fastshow-animation13">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder9.png' ></image>
+    </div>
+    <div  class="fastshow-animation14">
+      <image mode='aspectFill' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/silder10.png' ></image>
+    </div>
+    <div  class="fastshow-animation15">
+      <div>是不是还没看够?</div>
+    </div>
+    <div  class="fastshow-animation16">
+      <div>正片开始</div>
+    </div>
+    <div  class="fastshow-animation17">
+      <div>3</div>
+    </div>
+    <div  class="fastshow-animation18">
+      <div>2</div>
+    </div>
+    <div  class="fastshow-animation19">
+      <div>1</div>
+    </div>
+  </div>
+
+  <!-- 抢喜糖 -->
+  <div class="sugar-wrapper " bindtap="goToPlayGame" >
+    <image src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/糖果.png'></image>
+  </div>
+
+  <!-- 文案 -->
+  <div class="wedding-wrapper"  style="top:{{currentImg===13?'200px':'70px'}}" >
+    <div class="wedding-main">
+      <div>WEDDING INVITATION</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >~</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >佳人柔情似水</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >似糖似蜜</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >诚邀四海宾朋</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >良辰佳期如梦</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >如诗如画</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >喜迎八方来客</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >~</div>
+      <div>2019年01月31日</div>
+      <div>戊戌狗年 腊月二十六</div>
+      <div style="margin:'5px 0';display:{{currentImg===13?'block':'none'}}" >岳阳市平江县 本宅</div>
+    </div>
+  </div>
+
+  <!-- 点赞评论图标区 -->
+  <div class="right-wrapper" >
+    <a class="icon-wrapper love-wrapper" bindtap="{{iLike?'doShowLikes':'doSetILike'}}" >
+      <i class="iconfont icon-love right-icon" style="color:{{iLike?'#ff0072':'#fff'}}"></i>
+      <div class="right-count">{{likes.length}}</div>
+    </a>
+    <a class="icon-wrapper  msg-wrapper" bindtap="doShowComments">
+      <i class="iconfont icon-msg right-icon"></i>
+      <div class="right-count">{{comments.length}}</div>
+    </a>
+    <a type="button" class="icon-wrapper  location-wrapper" open-type="share" bindtap="onShareAppMessage">
+      <i class="iconfont icon-share right-icon"></i>
+    </a>
+    <button open-type='share' class='share-button'>分</button>
+  </div>
+
+    <!-- 音乐 -->
+  <div class="audio-wrapper " bindtap="audioClick" style="animation-play-state:{{isAudioPlay?'running':'paused'}}">
+    <image class='audio-cd' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/cd.png'></image>
+    <image class='audio-bg' src='cloud://aiyun1010-tangliyan0419.6169-aiyun1010-tangliyan0419/audio-bg.jpg'></image>
+  </div>
+
+  <!-- 点赞列表 -->
+  <div class="likes-wrapper {{showLikes?'likes-wrapper-show':''}}"  >
+    <div class="likes-header" >
+      <span class="likes-count">已收到{{likes.length}}个点赞祝福</span>
+      <a class="likes-close"  bindtap="doHideLikes">×</a>
+    </div>
+    <div class="likes-body" >
+      <div class="like-item"  wx:for="{{likes}}"  wx:key="{{index}}">
+        <div class="like-avatar">
+           <image  mode="aspectFill"
+         src='{{item.avatarUrl}}'
+         ></image>
+        </div>
+        <div class="like-name">
+          {{item.userName}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 评论列表 -->
+  <div class="comments-wrapper {{showComments?'comments-wrapper-show':''}}" >
+    <div class="comments-header" >
+      <span class="comments-count" >{{comments.length}}条评论</span>
+      <a class="comments-close"  bindtap="doHideComments">×</a>
+    </div>
+    <div class="comments-body">
+      <div class="comment-item"  wx:for="{{comments}}"   wx:key="{{index}}">
+        <div class="comment-photo" >
+          <image  mode="aspectFill"
+          src='{{item.avatarUrl}}'
+          ></image></div>
+        <div class="comment-body" >
+          <div class="comment-userName" >
+            {{item.userName}}
+            <div class="comment-time">{{item.showTime}}</div>
+          </div>
+          <div class="comment-content" >{{item.content}}</div>
+        </div>
+      </div>
+    </div>
+        <div class="comments-input-wrapper" style="bottom:{{bottom}}px" >
+      <input placeholder='请留下您的祝福...' adjust-position="{{false}}" bindfocus="foucus" bindblur="blur" bindinput="setInputValue" value="{{inputValue}}" ></input>
+      <a  bindtap="doSendComment"><i class="iconfont icon-send" ></i> 发 送</a>
+    </div>
+  </div>
+
+  <!-- 评论swiper -->
+  <swiper
+    autoplay="true"
+    interval="2000"
+    duration="2000"
+    vertical="true"
+    circular="true"
+    display-multiple-items="2"
+    class="bottom-wrapper" 
+    previous-margin="10px"
+    next-margin="10px"
+  >
+    <block wx:for="{{comments}}" wx:key="{{index}}">
+      <swiper-item >
+        <div class="swiper-item-content" >{{item.userName}}：{{item.content}}</div>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 轮播图片swiper -->
+  <swiper
+    class='main-swiper'
+    vertical="true"
+    bindtap="doClickBlank"
+    bindchange="swiperChange"
+    autoplay="{{isFastShow?false:true}}"
+    circular="true"
+  >
+    <block wx:for="{{swiperImgs}}"   wx:key="{{index}}">
+      <swiper-item class="main-swiper-item" >
+        <div style="display:{{index!==0&&index<6?'block':'none'}}">{{item.text}}</div>
+        <image mode="aspectFill" src="{{item.src}}" class="slide-image"  />
+      </swiper-item>
+    </block>
+  </swiper>
+
+</view>
+
+
